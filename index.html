@@ -1,50 +1,26 @@
 <html>
     <head>
         <title>Online Checkers</title>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-        <script type="text/javascript" charset="utf-8">
-            var socket = io();
-            var userName = null;
-            var roomName = null;
-            // example of handling a message
-            socket.on('draw', function(data){ console.log(data);});
 
-            function joinRoom() {
-                userName = document.getElementById("uname").value;
-                roomName = document.getElementById("rname").value;
-                socket.emit('join room', userName, roomName);
+        <style>
+            .blackSquare {
+                background-color: gray;
             }
+            .whiteSquare {
+                background-color: white;
+            }
+        </style>
 
-            function leaveRoom() {
-                userName = document.getElementById("uname").value;
-                roomName = document.getElementById("rname").value;
-                socket.emit('leave room', userName, roomName);
-            }
-
-            function startGame() {
-                userName = document.getElementById("uname").value;
-                roomName = document.getElementById("rname").value;
-                socket.emit('start game', userName, roomName);
-            }
-
-            function drawGame() {
-                userName = document.getElementById("uname").value;
-                roomName = document.getElementById("rname").value;
-                socket.emit('draw game', userName, roomName);
-            }
-
-            function forfeitGame() {
-                userName = document.getElementById("uname").value;
-                roomName = document.getElementById("rname").value;
-                socket.emit('forfeit game', userName, roomName);
-            }
-        </script>
     </head>
     <body>
         <h1>Online Checkers!</h1>
         <table>
             <tr>
-                <td>Board GUI goes here</td>
+                <td>
+                    <div id="board">
+                        An error caused the board to not initialize.
+                    </div>
+                </td>
                 <td>
                     <h4>Matchmaking</h4>
                     <ul>
@@ -65,4 +41,93 @@
             </tr>
         </table>
     </body>
+
+    <!-- Scripts for our application -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io();
+        var userName = null;
+        var roomName = null;
+
+        initBoard();
+
+        function initBoard() {
+            toggleColor = true;
+            htmlStr = "<table>";
+            for(i = 0; i < 8; i++) {
+                htmlStr += "<tr>";
+                for(j = 0; j < 8; j++) {
+                    if(toggleColor) {
+                        classStr = "whiteSquare";
+                        toggleColor = !toggleColor;
+                    } else {
+                        classStr = "blackSquare";
+                        toggleColor = !toggleColor;
+                    }
+                    htmlStr = htmlStr + "<td class='" + classStr + "'>Image</td>";
+                }
+                htmlStr += "</tr>";
+                toggleColor = !toggleColor;
+            }
+            console.log(htmlStr);
+            htmlStr += "</table>";
+
+
+            document.getElementById("board").innerHTML = htmlStr;
+        }
+
+        function printBoard(boardData) {
+            //parse the board data and print it to the screen
+        }
+
+        socket.on('room update', function(data){
+            //display the current room
+        });
+
+        socket.on('player update', function(players){
+            //display the players
+        });
+
+        socket.on('board update', function(board){
+            //display the new board
+        });
+
+        socket.on('game result', function(data){
+            //show the result of the game
+        });
+
+        socket.on('initiate draw', function(players){
+            //offer a draw to the player
+        });
+
+        function joinRoom() {
+            userName = document.getElementById("uname").value;
+            roomName = document.getElementById("rname").value;
+            socket.emit('join room', userName, roomName);
+        }
+
+        function leaveRoom() {
+            userName = document.getElementById("uname").value;
+            roomName = document.getElementById("rname").value;
+            socket.emit('leave room', userName, roomName);
+        }
+
+        function startGame() {
+            userName = document.getElementById("uname").value;
+            roomName = document.getElementById("rname").value;
+            socket.emit('start game', userName, roomName);
+        }
+
+        function drawGame() {
+            userName = document.getElementById("uname").value;
+            roomName = document.getElementById("rname").value;
+            socket.emit('draw game', userName, roomName);
+        }
+
+        function forfeitGame() {
+            userName = document.getElementById("uname").value;
+            roomName = document.getElementById("rname").value;
+            socket.emit('forfeit game', userName, roomName);
+        }
+    </script>
 </html>

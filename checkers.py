@@ -71,3 +71,8 @@ class Checkers:
     def print(self):
         for i in self.board:
             print(str(i) + "\n")
+
+    def to_display_data(self):
+        data = ""
+        for s in self.board:
+            data += s.value
