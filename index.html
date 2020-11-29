@@ -4,9 +4,40 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
         <script type="text/javascript" charset="utf-8">
             var socket = io();
-            socket.on('connect', function() {
-                socket.emit('my event', "test");
-            });
+            var userName = null;
+            var roomName = null;
+            // example of handling a message
+            socket.on('draw', function(data){ console.log(data);});
+
+            function joinRoom() {
+                userName = document.getElementById("uname").value;
+                roomName = document.getElementById("rname").value;
+                socket.emit('join room', userName, roomName);
+            }
+
+            function leaveRoom() {
+                userName = document.getElementById("uname").value;
+                roomName = document.getElementById("rname").value;
+                socket.emit('leave room', userName, roomName);
+            }
+
+            function startGame() {
+                userName = document.getElementById("uname").value;
+                roomName = document.getElementById("rname").value;
+                socket.emit('start game', userName, roomName);
+            }
+
+            function drawGame() {
+                userName = document.getElementById("uname").value;
+                roomName = document.getElementById("rname").value;
+                socket.emit('draw game', userName, roomName);
+            }
+
+            function forfeitGame() {
+                userName = document.getElementById("uname").value;
+                roomName = document.getElementById("rname").value;
+                socket.emit('forfeit game', userName, roomName);
+            }
         </script>
     </head>
     <body>
@@ -15,18 +46,21 @@
             <tr>
                 <td>Board GUI goes here</td>
                 <td>
-                    <!-- still in the process of making this. -->
-                    <table>
-                        <tr>Matchmaking</tr>
-                        <label for="uname">Username:</label>
-                        <input type="text" id="uname" name="uname">
-
-                        <tr><input type="text" id="fname" name="fname"></tr>
-                        <tr><button type="button">Join Match</button></tr>
-                        <tr>
-                            <td>Gameplay</td>
-                        </tr>
-                    </table>
+                    <h4>Matchmaking</h4>
+                    <ul>
+                        <li><label>User Name: </label><input type="text" id="uname"></li>
+                        <li><label>Room Name: </label><input type="text" id="rname"></li>
+                        <li><button type="button" id="jbutton" onclick="joinRoom()">Join Room</button></li>
+                        <li><button type="button" id="lbutton" onclick="leaveRoom()">Leave Room</button></li>
+                    </ul>
+                </td>
+                <td>
+                    <h4>Gameplay</h4>
+                    <ul>
+                        <li><button type="button" id="sbutton" onclick="startGame()">Start Game</button></li>
+                        <li><button type="button" id="dbutton" onclick="drawGame()">Offer Draw</button></li>
+                        <li><button type="button" id="fbutton" onclick="forfeitGame()">Forfeit</button></li>
+                    </ul>
                 </td>
             </tr>
         </table>
