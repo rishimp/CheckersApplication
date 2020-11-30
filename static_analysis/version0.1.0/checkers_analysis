@@ -1,0 +1,143 @@
+************* Module checkers
+C: 58, 0: Line too long (102/80) (line-too-long)
+C: 61, 0: Line too long (102/80) (line-too-long)
+C: 64, 0: Line too long (102/80) (line-too-long)
+C: 66, 0: Line too long (102/80) (line-too-long)
+C: 74, 0: Line too long (102/80) (line-too-long)
+C: 77, 0: Line too long (102/80) (line-too-long)
+C: 80, 0: Line too long (102/80) (line-too-long)
+C: 82, 0: Line too long (102/80) (line-too-long)
+C: 90, 0: Line too long (102/80) (line-too-long)
+C: 93, 0: Line too long (102/80) (line-too-long)
+C: 96, 0: Line too long (102/80) (line-too-long)
+C: 99, 0: Line too long (102/80) (line-too-long)
+C:  1, 0: Missing module docstring (missing-docstring)
+F:  1, 0: Unable to import 'enum' (import-error)
+W:  4, 0: Class has no __init__ method (no-init)
+C:  4, 0: Missing class docstring (missing-docstring)
+R:  4, 0: Too few public methods (0/2) (too-few-public-methods)
+C: 14, 0: Old-style class defined. (old-style-class)
+C: 14, 0: Missing class docstring (missing-docstring)
+W: 17,61: Unused variable 'y' (unused-variable)
+W: 17,42: Unused variable 'x' (unused-variable)
+C: 20, 4: Missing method docstring (missing-docstring)
+C: 40, 4: Invalid argument name "x0" (invalid-name)
+C: 40, 4: Invalid argument name "y0" (invalid-name)
+C: 40, 4: Missing method docstring (missing-docstring)
+C: 55, 4: Invalid argument name "x0" (invalid-name)
+C: 55, 4: Invalid argument name "y0" (invalid-name)
+C: 55, 4: Missing method docstring (missing-docstring)
+C: 71, 4: Invalid argument name "x0" (invalid-name)
+C: 71, 4: Invalid argument name "y0" (invalid-name)
+C: 71, 4: Missing method docstring (missing-docstring)
+C: 87, 4: Invalid argument name "x0" (invalid-name)
+C: 87, 4: Invalid argument name "y0" (invalid-name)
+C: 87, 4: Missing method docstring (missing-docstring)
+C:103, 4: Missing method docstring (missing-docstring)
+C:105,12: Invalid variable name "m" (invalid-name)
+C:108, 4: Missing method docstring (missing-docstring)
+C:114, 4: Missing method docstring (missing-docstring)
+C:121, 4: Invalid argument name "x0" (invalid-name)
+C:121, 4: Invalid argument name "y0" (invalid-name)
+C:121, 4: Invalid argument name "x1" (invalid-name)
+C:121, 4: Invalid argument name "y1" (invalid-name)
+C:121, 4: Missing method docstring (missing-docstring)
+
+
+Report
+======
+106 statements analysed.
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |109    |95.61 |110      |-1.00      |
++----------+-------+------+---------+-----------+
+|docstring |0      |0.00  |0        |=          |
++----------+-------+------+---------+-----------+
+|comment   |3      |2.63  |3        |=          |
++----------+-------+------+---------+-----------+
+|empty     |2      |1.75  |2        |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |38     |40       |-2.00      |
++-----------+-------+---------+-----------+
+|refactor   |1      |1        |=          |
++-----------+-------+---------+-----------+
+|warning    |3      |3        |=          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |=          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++-----------------------+------------+
+|message id             |occurrences |
++=======================+============+
+|invalid-name           |13          |
++-----------------------+------------+
+|missing-docstring      |12          |
++-----------------------+------------+
+|line-too-long          |12          |
++-----------------------+------------+
+|unused-variable        |2           |
++-----------------------+------------+
+|too-few-public-methods |1           |
++-----------------------+------------+
+|old-style-class        |1           |
++-----------------------+------------+
+|no-init                |1           |
++-----------------------+------------+
+|import-error           |1           |
++-----------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 6.04/10 (previous run: 5.93/10, +0.11)
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |2      |2          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |10     |10         |=          |10.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+
+
+

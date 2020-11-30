@@ -129,8 +129,9 @@
             socket.emit('space clicked', userName, roomName, locationId);
         }
 
-        socket.on('room update', function(data){
-            //display the current room
+        socket.on('room update', function(data) {
+            document.getElementById("roomLabel").innerHTML = "Room: " + data.room;
+            document.getElementById("usersLabel").innerHTML = "Users: " + data.user1 + " " + data.user2;
         });
 
         socket.on('player update', function(players){
@@ -138,7 +139,6 @@
         });
 
         socket.on('board update', function(board){
-            console.log("board updated");
             printBoard(board);
         });
 

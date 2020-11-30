@@ -41,6 +41,7 @@ def join_game(username, room):
         if len(rooms[room]) == 1:
             rooms[room].append(username)
             join_room(room)
+    emit_room_update(room)
 
 
 @socketio.on('leave room')
@@ -52,8 +53,15 @@ def leave_game(username, room):
         leave_room(room)
         if len(rooms[room]) == 0:
             del rooms[room]
-    print(rooms)
+    emit_room_update(room)
 
+def emit_room_update(room):
+    if len(rooms[room]) == 0:
+        emit('room update', {"user1" : "", "user2" : "", "room" : room}, room=room)
+    elif len(rooms[room]) == 1:
+        emit('room update', {"user1" : rooms[room][0], "user2" : "", "room" : room}, room=room)
+    elif len(rooms[room]) == 2:
+        emit('room update', {"user1" : rooms[room][0], "user2" : rooms[room][1], "room" : room}, room=room)
 
 @socketio.on('piece clicked')
 def piece_clicked(username, room, piece_id):
@@ -76,24 +84,17 @@ def space_clicked(username, room, piece_id):
 
 @socketio.on('draw game')
 def draw_game(username, room):
-    print(username, room)
     # example of how to emit a message
     emit("draw", username, room=room)
 
 @socketio.on('forfeit game')
 def forfeit_game(username, room):
-    print(username, room)
-
+    pass # do nothing for now
 
 # serves the index page
 @app.route('/')
 def index():
     return serve_file('index.html')
-
-@app.route('/test/<user>')
-def hello_world1(user):
-    return user
-
 
 # returns the text from a file
 def serve_file(filename):
