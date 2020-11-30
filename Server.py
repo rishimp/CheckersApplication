@@ -16,7 +16,13 @@ room_ready = {}
 
 @socketio.on('start game')
 def start_game(username, room):
-    print("starting game for " +username)
+    """[Starts the game with the username and the room entered]
+
+    Args:
+        username (string): [the name of the user starting the game]
+        room (string): [the name of the user in which the user wants to start the game]
+    """
+    #print("starting game for " + username)
     if room not in room_ready.keys():
         room_ready[room] = [username]
     elif username not in room_ready[room]:
@@ -29,6 +35,12 @@ def start_game(username, room):
 
 @socketio.on('join room')
 def join_game(username, room):
+    """[joins the game with the room name]
+
+    Args:
+        username (string): [the name of the user entering the room]
+        room (string): [the name of the room the user wants to enter]
+    """
     print("joining room " +  room + " " + username)
     if not is_valid_username(username, room):
         print("Invalid Username")
@@ -46,6 +58,12 @@ def join_game(username, room):
 
 @socketio.on('leave room')
 def leave_game(username, room):
+    """[the user leaves the room they ar ein]
+
+    Args:
+        username (string): [the name of the user that wants to leave]
+        room (string): [the room the user wants to exit]
+    """
     if room not in rooms.keys():
         print("Room is not in use")
     elif username in rooms[room]:
@@ -56,6 +74,11 @@ def leave_game(username, room):
     emit_room_update(room)
 
 def emit_room_update(room):
+    """[updates the users of the room]
+
+    Args:
+        room (string): [the room name we are updating]
+    """
     if len(rooms[room]) == 0:
         emit('room update', {"user1" : "", "user2" : "", "room" : room}, room=room)
     elif len(rooms[room]) == 1:
@@ -65,6 +88,13 @@ def emit_room_update(room):
 
 @socketio.on('piece clicked')
 def piece_clicked(username, room, piece_id):
+    """[highlits the piece the user clicks]
+
+    Args:
+        username ([string]): [the name of user clicking the piece]
+        room ([stirng]): [the name of the room in which the pieve is clicked]
+        piece_id ([int]): [the int assigned to the piece]
+    """
     x_str, y_str, color = piece_id.split(',')
     x0 = int(x_str)
     y0 = int(y_str)
@@ -75,6 +105,13 @@ def piece_clicked(username, room, piece_id):
 
 @socketio.on('space clicked')
 def space_clicked(username, room, piece_id):
+    """[if a space is clicked by the user for a piece]
+
+    Args:
+        username ([type]): [description]
+        room ([type]): [description]
+        piece_id ([type]): [description]
+    """
     x_str, y_str = piece_id.split(',')
     x1 = int(x_str)
     y1 = int(y_str)
