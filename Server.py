@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
-
+from game import Game
+import random
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
@@ -9,27 +10,26 @@ socketio = SocketIO(app)
 if __name__ == '__main__':
     socketio.run(app)
 
-# @socketio.on('connect')
-# def test_connect():
-#     emit('my response', {'data': 'Connected'})
-#
-# @socketio.on('disconnect')
-# def test_disconnect():
-#     print('Client disconnected')
-
-
 rooms = {}
 room_games = {}
+room_ready = {}
 
 @socketio.on('start game')
 def start_game(username, room):
-    print(username, room)
-
+    print("starting game for " +username)
+    if room not in room_ready.keys():
+        room_ready[room] = [username]
+    elif username not in room_ready[room]:
+        room_ready[room].append(username)
+    if len(room_ready[room]) == 2:
+        coin = random.randint(0,1)
+        room_games[room] = Game(rooms[room][coin], rooms[room][1-coin])
+        del room_ready[room]
+        emit("board update", room_games[room].get_board(), room=room)
 
 @socketio.on('join room')
 def join_game(username, room):
-    print(username, room)
-
+    print("joining room " +  room + " " + username)
     if not is_valid_username(username, room):
         print("Invalid Username")
     elif not is_valid_room(room):
@@ -41,12 +41,10 @@ def join_game(username, room):
         if len(rooms[room]) == 1:
             rooms[room].append(username)
             join_room(room)
-    print(rooms)
 
 
 @socketio.on('leave room')
 def leave_game(username, room):
-    print(username, room)
     if room not in rooms.keys():
         print("Room is not in use")
     elif username in rooms[room]:
@@ -62,6 +60,7 @@ def piece_clicked(username, room, piece_id):
     x_str, y_str = piece_id.split(',')
     x0 = int(x_str)
     y0 = int(y_str)
+
     # get highlighted moves from here
 
 

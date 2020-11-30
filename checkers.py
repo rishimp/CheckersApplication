@@ -118,5 +118,11 @@ class Checkers:
                 data += str(col.value)
         return data
 
+    def make_move(self, x0, y0, x1, y1):
+        self.clear_highlighting()
+        if (x1, y1) in self.get_valid_moves(x0, y0):
+            self.board[x1, y1] = self.board[x0, y0]
+            self.board[x0, y0] = Square.EMPTY
+
 c = Checkers()
 print(c.to_display_data())
