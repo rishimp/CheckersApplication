@@ -1,0 +1,121 @@
+************* Module CheckersApplication.checkers
+C:154, 0: Line too long (94/80) (line-too-long)
+C:172, 0: Line too long (85/80) (line-too-long)
+C:  1, 0: Missing module docstring (missing-docstring)
+F:  1, 0: Unable to import 'enum' (import-error)
+W:  5,-1: String statement has no effect (pointless-string-statement)
+W:  7, 0: Class has no __init__ method (no-init)
+R:  7, 0: Too few public methods (0/2) (too-few-public-methods)
+C: 21, 0: Old-style class defined. (old-style-class)
+C: 56, 4: Invalid argument name "x0" (invalid-name)
+C: 56, 4: Invalid argument name "y0" (invalid-name)
+C: 76, 4: Invalid argument name "x0" (invalid-name)
+C: 76, 4: Invalid argument name "y0" (invalid-name)
+C:101, 4: Invalid argument name "x0" (invalid-name)
+C:101, 4: Invalid argument name "y0" (invalid-name)
+C:126, 4: Invalid argument name "x0" (invalid-name)
+C:126, 4: Invalid argument name "y0" (invalid-name)
+C:158,12: Invalid variable name "m" (invalid-name)
+C:181, 4: Invalid argument name "x0" (invalid-name)
+C:181, 4: Invalid argument name "y0" (invalid-name)
+C:181, 4: Invalid argument name "x1" (invalid-name)
+C:181, 4: Invalid argument name "y1" (invalid-name)
+
+
+Report
+======
+107 statements analysed.
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |121    |62.69 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|docstring |55     |28.50 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|comment   |0      |0.00  |NC       |NC         |
++----------+-------+------+---------+-----------+
+|empty     |17     |8.81  |NC       |NC         |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |NC       |NC         |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |NC       |NC         |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |17     |NC       |NC         |
++-----------+-------+---------+-----------+
+|refactor   |1      |NC       |NC         |
++-----------+-------+---------+-----------+
+|warning    |2      |NC       |NC         |
++-----------+-------+---------+-----------+
+|error      |0      |NC       |NC         |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------------------+------------+
+|message id                 |occurrences |
++===========================+============+
+|invalid-name               |13          |
++---------------------------+------------+
+|line-too-long              |2           |
++---------------------------+------------+
+|too-few-public-methods     |1           |
++---------------------------+------------+
+|pointless-string-statement |1           |
++---------------------------+------------+
+|old-style-class            |1           |
++---------------------------+------------+
+|no-init                    |1           |
++---------------------------+------------+
+|missing-docstring          |1           |
++---------------------------+------------+
+|import-error               |1           |
++---------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 8.13/10
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |NC         |NC         |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |2      |NC         |NC         |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |10     |NC         |NC         |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+
+
+

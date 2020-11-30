@@ -1,7 +1,7 @@
 from checkers import Checkers
 
-class Game():
-    # we can assume player 1 is black and player 2 is white
+class Game:
+
     def __init__(self, player1, player2):
         """Initializes a game with 2 players
 
