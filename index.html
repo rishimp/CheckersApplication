@@ -4,10 +4,26 @@
 
         <style>
             .blackSquare {
-                background-color: gray;
+                width: 50px;
+                height: 50px;
+                background-color: Silver;
             }
+
+            .highlightedSquare {
+                width: 50px;
+                height: 50px;
+                background-color: DimGray;
+            }
+
             .whiteSquare {
-                background-color: white;
+                width: 50px;
+                height: 50px;
+                background-color: White;
+            }
+
+            img {
+                width:40px;
+                height:40px;
             }
         </style>
 
@@ -28,6 +44,8 @@
                         <li><label>Room Name: </label><input type="text" id="rname"></li>
                         <li><button type="button" id="jbutton" onclick="joinRoom()">Join Room</button></li>
                         <li><button type="button" id="lbutton" onclick="leaveRoom()">Leave Room</button></li>
+                        <li><label id="roomLabel">Room: </label></li>
+                        <li><label id="usersLabel">Users: </label></li>
                     </ul>
                 </td>
                 <td>
@@ -49,9 +67,9 @@
         var userName = null;
         var roomName = null;
 
-        initBoard();
+        printBoard("6363636336363636636363637676565665656565161616166161616116161616");
 
-        function initBoard() {
+        function printBoard(boardData) {
             toggleColor = true;
             htmlStr = "<table>";
             for(i = 0; i < 8; i++) {
@@ -64,20 +82,45 @@
                         classStr = "blackSquare";
                         toggleColor = !toggleColor;
                     }
-                    htmlStr = htmlStr + "<td class='" + classStr + "'>Image</td>";
+                    htmlStr = htmlStr + "<td align='center' class='" + getClassStr(i, j, boardData, classStr) + "'>" + getImage(i, j, boardData) + "</td>";
                 }
                 htmlStr += "</tr>";
                 toggleColor = !toggleColor;
             }
             console.log(htmlStr);
             htmlStr += "</table>";
-
-
             document.getElementById("board").innerHTML = htmlStr;
         }
 
-        function printBoard(boardData) {
-            //parse the board data and print it to the screen
+        function getImage(i, j, boardData) {
+            imageType = boardData[8*i + j]
+            if(imageType == "1") {
+                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/HgedSXS.png'/>";
+            } else if(imageType == "2") {
+                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/RQQhI5g.png'/>";
+            } else if(imageType == "3") {
+                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/hbOnT5i.png'/>";
+            } else if(imageType == "4") {
+                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/WJc3zYK.png'/>";
+            } else if(imageType == "5" || imageType == "7") {
+                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/q4aqbTd.png'/>";
+            } else {
+                return "";
+            }
+        }
+
+        function getClassStr(i, j, boardData, classStr) {
+            imageType = boardData[8*i + j]
+            if(imageType == "7") {
+                return "highlightedSquare";
+            } else {
+                return classStr;
+            }
+        }
+
+        function pieceClicked(pieceId) {
+            console.log(pieceId)
+            socket.emit('piece clicked', userName, roomName, pieceId);
         }
 
         socket.on('room update', function(data){
@@ -89,7 +132,7 @@
         });
 
         socket.on('board update', function(board){
-            //display the new board
+            printBoard(board);
         });
 
         socket.on('game result', function(data){

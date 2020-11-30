@@ -19,6 +19,7 @@ if __name__ == '__main__':
 
 
 rooms = {}
+room_games = {}
 
 @socketio.on('start game')
 def start_game(username, room):
@@ -54,6 +55,15 @@ def leave_game(username, room):
         if len(rooms[room]) == 0:
             del rooms[room]
     print(rooms)
+
+
+@socketio.on('piece clicked')
+def piece_clicked(username, room, piece_id):
+    x_str, y_str = piece_id.split(',')
+    x0 = int(x_str)
+    y0 = int(y_str)
+    # get highlighted moves from here
+
 
 @socketio.on('draw game')
 def draw_game(username, room):
