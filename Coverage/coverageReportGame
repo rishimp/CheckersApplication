@@ -1,0 +1,7 @@
+Name                                                                             Stmts   Miss  Cover
+----------------------------------------------------------------------------------------------------
+gameTest.py                                                                         25      2    92%
+/Users/jashanpreetsingh/Desktop/SE181/Checkers/CheckersApplication/checkers.py     107     51    52%
+/Users/jashanpreetsingh/Desktop/SE181/Checkers/CheckersApplication/game.py          36     10    72%
+----------------------------------------------------------------------------------------------------
+TOTAL                                                                              168     63    62%

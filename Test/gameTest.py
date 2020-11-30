@@ -16,9 +16,18 @@ class TestGame(unittest.TestCase):
 
     def test_Make_Move(self):
         temp = game.Game("test1", "test2")
-        temp.make_move("test1", 3, 2)
+        temp.set_tentative_selection(3,2)
+        temp.make_move("test1", 4, 3)
         self.assertEqual(temp.idle, "test1")
 
+    def test_Get_Board(self):
+        temp = game.Game("test1", "test2").get_board()
+        self.assertIsNotNone(temp)
+
+    def test_Get_Unhighlited_Board(self):
+        temp = game.Game("test1", "test2").get_unhighlighted_board()
+        self.assertIsNotNone(temp)
+    
 
 
 if __name__ == '__main__':
