@@ -55,15 +55,15 @@ class Checkers:
     def _get_valid_man_moves_white(self, x0, y0):
         valid_moves = []
         if y0-1 == -1:
-            if self.board[x0-1][y0+1] == Square.EMPTY:
+            if self.board[x0-1][y0+1] == Square.EMPTY or self.board[x0-1][y0+1] == Square.HIGHLIGHTED:
                 valid_moves.append((x0-1, y0+1))
         elif y0+1 == 8:
-            if self.board[x0-1][y0-1] == Square.EMPTY:
+            if self.board[x0-1][y0-1] == Square.EMPTY or self.board[x0-1][y0-1] == Square.HIGHLIGHTED:
                 valid_moves.append((x0-1, y0-1))
         else:
-            if self.board[x0-1][y0+1] == Square.EMPTY:
+            if self.board[x0-1][y0+1] == Square.EMPTY or self.board[x0-1][y0+1] == Square.HIGHLIGHTED:
                 valid_moves.append((x0-1, y0+1))
-            if self.board[x0-1][y0-1] == Square.EMPTY:
+            if self.board[x0-1][y0-1] == Square.EMPTY or self.board[x0-1][y0-1] == Square.HIGHLIGHTED:
                 valid_moves.append((x0-1, y0-1))
         return valid_moves
 
@@ -71,32 +71,32 @@ class Checkers:
     def _get_valid_man_moves_black(self, x0, y0):
         valid_moves = []
         if y0-1 == -1:
-            if self.board[x0+1][y0+1] == Square.EMPTY:
-                valid_moves.append((x0-1, y0+1))
+            if self.board[x0+1][y0+1] == Square.EMPTY or self.board[x0+1][y0+1] == Square.HIGHLIGHTED:
+                valid_moves.append((x0+1, y0+1))
         elif y0+1 == 8:
-            if self.board[x0+1][y0-1] == Square.EMPTY:
-                valid_moves.append((x0-1, y0-1))
+            if self.board[x0+1][y0-1] == Square.EMPTY or self.board[x0+1][y0-1] == Square.HIGHLIGHTED:
+                valid_moves.append((x0+1, y0-1))
         else:
-            if self.board[x0+1][y0+1] == Square.EMPTY:
-                valid_moves.append((x0-1, y0+1))
-            if self.board[x0+1][y0-1] == Square.EMPTY:
-                valid_moves.append((x0-1, y0-1))
+            if self.board[x0+1][y0+1] == Square.EMPTY or self.board[x0+1][y0+1] == Square.HIGHLIGHTED:
+                valid_moves.append((x0+1, y0+1))
+            if self.board[x0+1][y0-1] == Square.EMPTY or self.board[x0+1][y0-1] == Square.HIGHLIGHTED:
+                valid_moves.append((x0+1, y0-1))
         return valid_moves
 
     # returns all possible moves that a king piece can make or None
     def _get_valid_king_moves(self, x0, y0):
         valid_moves = []
         if x0-1 != -1 and y0-1 != -1:
-            if self.board[x0-1][y0-1] == Square.EMPTY:
+            if self.board[x0-1][y0-1] == Square.EMPTY or self.board[x0-1][y0-1] == Square.HIGHLIGHTED:
                 valid_moves.append((x0, y0))
         if x0+1 != 8 and y0-1 != -1:
-            if self.board[x0+1][y0-1] == Square.EMPTY:
+            if self.board[x0+1][y0-1] == Square.EMPTY or self.board[x0+1][y0-1] == Square.HIGHLIGHTED:
                 valid_moves.append((x0, y0))
         if x0+1 != 8 and y0+1 != 8:
-            if self.board[x0+1][y0+1] == Square.EMPTY:
+            if self.board[x0+1][y0+1] == Square.EMPTY or self.board[x0+1][y0+1] == Square.HIGHLIGHTED:
                 valid_moves.append((x0, y0))
         if x0-1 != -1 and y0+1 != 8:
-            if self.board[x0-1][y0+1] == Square.EMPTY:
+            if self.board[x0-1][y0+1] == Square.EMPTY or self.board[x0-1][y0+1] == Square.HIGHLIGHTED:
                 valid_moves.append((x0, y0))
         return valid_moves
 
@@ -121,8 +121,8 @@ class Checkers:
     def make_move(self, x0, y0, x1, y1):
         self.clear_highlighting()
         if (x1, y1) in self.get_valid_moves(x0, y0):
-            self.board[x1, y1] = self.board[x0, y0]
-            self.board[x0, y0] = Square.EMPTY
+            self.board[x1][y1] = self.board[x0][y0]
+            self.board[x0][y0] = Square.EMPTY
 
 c = Checkers()
 print(c.to_display_data())

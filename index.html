@@ -82,7 +82,7 @@
                         classStr = "blackSquare";
                         toggleColor = !toggleColor;
                     }
-                    htmlStr = htmlStr + "<td align='center' class='" + getClassStr(i, j, boardData, classStr) + "'>" + getImage(i, j, boardData) + "</td>";
+                    htmlStr = htmlStr + "<td align='center' " + getClassStr(i, j, boardData, classStr) + ">" + getImage(i, j, boardData) + "</td>";
                 }
                 htmlStr += "</tr>";
                 toggleColor = !toggleColor;
@@ -95,15 +95,17 @@
         function getImage(i, j, boardData) {
             imageType = boardData[8*i + j]
             if(imageType == "1") {
-                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/HgedSXS.png'/>";
+                return "<img id='" + i + "," + j + "," + "w" + "' onclick='pieceClicked(this.id)' src='https://imgur.com/HgedSXS.png'/>";
             } else if(imageType == "2") {
-                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/RQQhI5g.png'/>";
+                return "<img id='" + i + "," + j + "," + "w" + "' onclick='pieceClicked(this.id)' src='https://imgur.com/RQQhI5g.png'/>";
             } else if(imageType == "3") {
-                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/hbOnT5i.png'/>";
+                return "<img id='" + i + "," + j + "," + "b" + "' onclick='pieceClicked(this.id)' src='https://imgur.com/hbOnT5i.png'/>";
             } else if(imageType == "4") {
-                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/WJc3zYK.png'/>";
-            } else if(imageType == "5" || imageType == "7") {
-                return "<img id='" + i + "," + j + "' onclick='pieceClicked(this.id)' src='https://imgur.com/q4aqbTd.png'/>";
+                return "<img id='" + i + "," + j + "," + "b" + "' onclick='pieceClicked(this.id)' src='https://imgur.com/WJc3zYK.png'/>";
+            } else if(imageType == "5") {
+                return "<img src='https://imgur.com/q4aqbTd.png'/>";
+            } else if(imageType == "7") {
+                return "<img id='" + i + "," + j + "' onclick='moveSelected(this.id)' src='https://imgur.com/q4aqbTd.png'/>";
             } else {
                 return "";
             }
@@ -112,15 +114,19 @@
         function getClassStr(i, j, boardData, classStr) {
             imageType = boardData[8*i + j]
             if(imageType == "7") {
-                return "highlightedSquare";
+                return "class='highlightedSquare'";
             } else {
-                return classStr;
+                return "class='" + classStr + "'";
             }
         }
 
         function pieceClicked(pieceId) {
-            console.log(pieceId); //remove this later
             socket.emit('piece clicked', userName, roomName, pieceId);
+        }
+
+        function moveSelected(locationId) {
+            console.log(locationId)
+            socket.emit('space clicked', userName, roomName, locationId);
         }
 
         socket.on('room update', function(data){

@@ -57,11 +57,21 @@ def leave_game(username, room):
 
 @socketio.on('piece clicked')
 def piece_clicked(username, room, piece_id):
-    x_str, y_str = piece_id.split(',')
+    x_str, y_str, color = piece_id.split(',')
     x0 = int(x_str)
     y0 = int(y_str)
+    if room_games[room].is_correct_side(username, color):
+        room_games[room].set_tentative_selection(x0, y0)
+        room_games[room].highlight_possible_moves(username, x0, y0)
+        emit('board update', room_games[room].get_board(), room=room)
 
-    # get highlighted moves from here
+@socketio.on('space clicked')
+def space_clicked(username, room, piece_id):
+    x_str, y_str = piece_id.split(',')
+    x1 = int(x_str)
+    y1 = int(y_str)
+    room_games[room].make_move(username, x1, y1)
+    emit('board update', room_games[room].get_unhighlighted_board(), room=room)
 
 
 @socketio.on('draw game')
