@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
-from game import Game
+from .game import Game
 import random
 
 app = Flask(__name__)

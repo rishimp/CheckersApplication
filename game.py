@@ -1,4 +1,4 @@
-from checkers import Checkers
+from .checkers import Checkers
 
 class Game:
 
